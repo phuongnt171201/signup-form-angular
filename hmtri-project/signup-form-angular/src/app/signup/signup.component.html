@@ -1,0 +1,67 @@
+<div class="wrapper">
+  <h2>Account Register</h2>
+  <!--    <div id="error_message"></div>-->
+  <form id="myform" #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm.value)" novalidate>
+    <div class="input_field">
+      <input type="text" placeholder="Username" id="username"
+             required minlength="5"
+             ngModel name="username"
+             #username="ngModel">
+    </div>
+    <div class="error" role="alert"
+         *ngIf="username.errors && (username.dirty || username.touched)">
+      <p *ngIf="username.errors?.required">Required username</p>
+      <p *ngIf="username.errors?.minlength">Invalid username</p>
+    </div>
+
+    <div class="input_field">
+      <input type="text" placeholder="Email" id="email" [pattern]="emailPattern"
+             ngModel name="email" #email="ngModel">
+    </div>
+    <div class="error" role="alert"
+         *ngIf="email.errors && (email.dirty || email.touched)">
+      <p *ngIf="email.errors?.pattern">Invalid email</p>
+    </div>
+
+    <div class="input_field">
+      <input type="password" placeholder="Password" id="password" required [pattern]="pwdPattern"
+             ngModel name="password"
+             #password="ngModel">
+    </div>
+    <div class="error" role="alert"
+         *ngIf="password.errors && (password.dirty || password.touched)">
+      <p *ngIf="password.errors?.required">Required password</p>
+      <p *ngIf="password.errors?.pattern">Invalid password</p>
+
+    </div>
+
+    <div class="input_field">
+      <input type="password" placeholder="Confirm Password" id="confirm_password"
+             required
+             ngModel name="confirm"
+             #confirm="ngModel">
+    </div>
+    <div class="error" role="alert"
+         *ngIf="confirm.errors && (confirm.dirty || confirm.touched)">
+      <p *ngIf="confirm.errors?.required">Required confirm password</p>
+    </div>
+    <p *ngIf="checkEqualPwd(password, confirm)">Not match confirm password</p>
+
+    <!--    <div id="error_confirm"></div>-->
+    <!--    <div class="input_field">-->
+    <!--      <input type="text" id="datepicker" placeholder="Birthday">-->
+    <!--    </div>-->
+    <div class="btn">
+      <input type="submit">
+    </div>
+
+  </form>
+
+<!--  <p>Form value:</p>-->
+<!--  <pre>{{ signupForm.value | json }}</pre>-->
+
+<!--  <p>Form contactName errors:</p>-->
+<!--  <pre>{{ signupForm.controls.contactName?.errors | json }}</pre>-->
+
+
+  </div>
